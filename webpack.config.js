@@ -1,6 +1,7 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
+	devtool: 'cheap-module-source-map',
 	context: path.join(__dirname, 'src'),
 	entry: {
 		app:  './app/app.js',
@@ -23,7 +24,11 @@ module.exports = {
 	devServer: {
 		contentBase: path.join(__dirname, 'dist'),
 		inline: true,
-		stats: 'errors-only'
+		stats: {
+			colors: true,
+			reasons: true,
+			chunks: false
+		}
 	},
 	plugins: [
 		new HtmlWebpackPlugin({

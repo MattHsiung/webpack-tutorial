@@ -1,3 +1,2 @@
-import string from './string';
-import $ from 'jquery';
-alert(string);
+const bar = () => 'baz';
+console.log(foo);
