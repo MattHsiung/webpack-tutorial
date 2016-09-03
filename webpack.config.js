@@ -1,5 +1,5 @@
 var path = require('path');
-var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
 	context: path.join(__dirname, 'src'),
 	entry: {
@@ -24,5 +24,21 @@ module.exports = {
 		contentBase: path.join(__dirname, 'dist'),
 		inline: true,
 		stats: 'errors-only'
-	}
+	},
+	plugins: [
+		new HtmlWebpackPlugin({
+			template: path.join(__dirname, 'src', 'index.html'),
+			hash: true,
+			chunks: ['app']
+		}),
+
+		new HtmlWebpackPlugin({
+			template: path.join(__dirname, 'src', 'index.html'),
+			hash: true,
+			filename: 'about.html',
+			chunks: ['about'],
+
+		})
+
+	]
 };
