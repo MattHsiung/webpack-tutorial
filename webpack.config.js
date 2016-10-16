@@ -1,15 +1,18 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+
 module.exports = {
-	devtool: 'cheap-module-source-map',
+	// devtool: 'cheap-module-source-map',
 	context: path.join(__dirname, 'src'),
 	entry: {
 		app:  './app/app.js',
-		about: './about/about.js'
+		about: './about/about.js',
+		vendor: ['jquery']
 	},
 	output: {
 		path: path.join(__dirname, 'dist'),
-		filename: '[name].bundle.js'
+		filename: '[name].[chunkhash].bundle.js'
 	},
 	module: {
 		loaders: [
@@ -27,23 +30,26 @@ module.exports = {
 		stats: {
 			colors: true,
 			reasons: true,
-			chunks: false
+			chunks: false,
+			modules: false
 		}
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: path.join(__dirname, 'src', 'index.html'),
 			hash: true,
-			chunks: ['app']
+			excludeChunks: ['about']
 		}),
 
 		new HtmlWebpackPlugin({
 			template: path.join(__dirname, 'src', 'index.html'),
 			hash: true,
 			filename: 'about.html',
-			chunks: ['about'],
+			excludeChunks: ['app']
+		}),
 
+		new CommonsChunkPlugin({
+			name: ['commons', 'vendor', 'boostrap']
 		})
-
 	]
 };
