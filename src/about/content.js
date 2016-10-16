@@ -1,5 +1,5 @@
 const content = `
-	<div class="content">
+	<div class="content" style='background: red;'>
 		<h1>About</h1>
 	</div>
 `;

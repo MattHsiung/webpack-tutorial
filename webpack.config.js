@@ -3,7 +3,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 
 module.exports = {
-	// devtool: 'cheap-module-source-map',
 	context: path.join(__dirname, 'src'),
 	entry: {
 		app:  './app/app.js',
